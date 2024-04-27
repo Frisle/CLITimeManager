@@ -5,7 +5,9 @@ From programmer to programmers<br>
 
 This app has <b>NO</b> fancy UI, <b>NO</b> big complicated data bases, <b>NO</b> online functions, <b>NO</b> third parties hyped modules<br>
 Just bare bone python, cli and json DB<br>
-That`s it!<br><br>
+That`s it!<br>
+Yes, it has json DB and coding bunch of functions to read/write json files was tedious and small SQLite would be much easier to work with... BUT WHERE THE FUN IN THAT?!<br>
+Although i have already code it all so you don't have to
 
 Despite simplicity it has all the instruments to track down time spended on a tasks<br>
 You can create/edit/delete task, manually add time, search through the working days<br>
