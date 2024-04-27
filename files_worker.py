@@ -11,10 +11,10 @@ data_tasks_time = os.path.join(os.getcwd(), r"data_tasks_time.json")
 
 
 def erase_data(position=None, all_days=True):
-    if all:
+    if all_days:
         clear_json(data_tasks_time)
         check_current_date(data_tasks_time)
-    elif not all:
+    elif not all_days:
         clear_json(data_tasks_time, position)
         check_current_date(data_tasks_time, position)
 
