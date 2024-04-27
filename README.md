@@ -42,4 +42,4 @@ Input "cls" to clean the console
 
 ![cmd_Q2Jpe0IIlc](https://github.com/Frisle/CLITimeManager/assets/47441164/ffb8a70e-e435-4d72-b1d5-041bf9ead46d)
 
-Beautiful, is not it?
+Beautiful, is it not?
