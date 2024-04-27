@@ -43,3 +43,11 @@ Input "cls" to clean the console
 ![cmd_Q2Jpe0IIlc](https://github.com/Frisle/CLITimeManager/assets/47441164/ffb8a70e-e435-4d72-b1d5-041bf9ead46d)
 
 Beautiful, is it not?
+
+### Compilation
+
+If you desperate to compile it there is a files and libraries you will have to get
+
+First and foremost Nuitka. It will compile all modules into handy .exe
+
+For it to work Nuitka have to download an archive about ~300MB in weight 
