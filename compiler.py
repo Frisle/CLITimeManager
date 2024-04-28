@@ -1,8 +1,9 @@
 import os
+import traceback
 
 validation = input("In order to compile TimeManager in .exe you have to install Nuitka lib. Continue? Y or enter to cancel ")
 working_dir = os.getcwd()
-if validation == "Y".lower():
+if validation == "y" or validation == "Y":
     try:
         import nuitka
         print("Module Nuitka already installed")
@@ -15,10 +16,10 @@ if validation == "Y".lower():
               '--file-version=0.0.5.1 '
               '--product-name=Time_manager '
               '--enable-console '
-              '--mingw64 '
               '--standalone '
               '--windows-icon-from-ico=coding.ico '
               f'--output-dir="{working_dir}" '
               '--remove-output main.py')
+
 elif not validation:
     print("compilation canceled")

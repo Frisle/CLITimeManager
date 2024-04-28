@@ -213,7 +213,7 @@ def main():
               "Input \"Read time\" show how much time is spend on each task\n"
               "\tadd -n chose a task and return all time for one task\n"
               "\tadd -d chose a date and return all time for all tasks\n"
-              "\tpress Enter and return time for current day"
+              "\tpress Enter and return time for current day\n"
               "Input \"Delete task\" and chose task to remove (in the current day by default)\n"
               "Input \"Erase\" and flush entire json DB\n"
               "\tadd -one and chose one date to flush\n"
