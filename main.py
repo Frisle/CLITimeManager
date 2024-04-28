@@ -49,7 +49,6 @@ def main():
     idle_time_stop = time.time()  # stop idle time measure
     idle_result = idle_time_stop - idle_time_start
     files_worker.update_task_json("idle_parameter", "work", json_data_list_file)
-    idle_stop = datetime.now()
     time_spend = timedelta(seconds=idle_result)
 
     """
@@ -100,6 +99,9 @@ def main():
     elif "return" in user_input.lower():
 
         list_of_tasks = files_worker.read_json_tasks(data_tasks_time, time_now)
+        if not list_of_tasks:
+            print("There is no task today yet. Start at least one task to return list of tasks")
+            main()
         try:
             back_to_task = int(input("Input task to return to: "))
             tasks = " ".join(list_of_tasks[back_to_task])
@@ -111,7 +113,7 @@ def main():
 
     # read elapsed time on each task at any day or by any task.
     elif "read time" in user_input.lower():
-        time_control.read_time(data_tasks_time)
+        time_control.read_time(data_tasks_time, user_input.lower())
 
     # delete a task at current day
     elif "delete task" in user_input.lower():
@@ -121,43 +123,48 @@ def main():
                 print("There is no task today yet")
                 main()
             input_task_num = int(input("Input task to delete: "))
-            if input_task_num == "quit".lower():
-                main()
+
             tasks = " ".join(list_of_tasks[input_task_num])
             files_worker.append_json(time_now, tasks, data_tasks_time, remove=True)
+            print(f"Task \"{tasks}\" has been deleted")
             main()
         except ValueError:
             print("Input valid symbols")
+            main()
+        except IndexError:
+            print("No task with such index")
             main()
 
     # manually add time to daily tasks
     elif "enter time" in user_input.lower():
         list_of_tasks = files_worker.read_json_tasks(data_tasks_time, time_now)
         if not list_of_tasks:
-            print("There is no task today yet")
+            print("There is no task today yet. Begin at least one task to manipulate the records")
             main()
         try:
-            task_to_input = int(input("Input task to enter time: "))
-            if task_to_input == "quit".lower():
-                main()
+            task_to_input = int(input("Input task to change time: "))
+
             task = " ".join(list_of_tasks[task_to_input])
             task_index = files_worker.read_json_tasks_index(time_now, task, data_tasks_time)
-            if user_input.lower().rfind("-r"):
+            if user_input.lower().split().count("-r") > 0:
                 files_worker.append_json_tasks(time_now, task_index, task, 0, data_tasks_time, remove=True)
                 print(f"Last time record from \"{task}\" has been removed")
                 main()
+            elif user_input.lower().split().count("-idle") > 0:
+                files_worker.append_json_tasks(time_now, task_index, task, 0, data_tasks_time, remove=True)
             input_time = int(input("Input time in minutes: "))
-            if input_time == "quit".lower():
-                main()
+
             converted_min_to_sec = input_time * 60
             files_worker.append_json_tasks(time_now, task_index, task, converted_min_to_sec, data_tasks_time)
+
         except ValueError:
             print("Input valid symbols")
             main()
 
     # clear all data from data_tasks_time.json
     elif "erase" in user_input.lower():
-        if user_input.lower().rfind("-one"):
+        if user_input.lower().split().count("-one") > 0:
+            print("logic triggered")
             input_date = input("Input date to delete (MM/DD/YYYY): ")
             date = input_date
             validating = input(f"This action erase all tasks at {date}, press Y to continue or press enter to cancel? ")
@@ -174,6 +181,24 @@ def main():
             elif not validating.lower():
                 print("Deletion has been canceled")
         main()
+
+    # rename chosen task in dict
+    elif "rename" in user_input.lower():
+        try:
+            list_of_tasks = files_worker.read_json_tasks(data_tasks_time, time_now)
+            task_to_rename = int(input("Chose task to rename: "))
+
+            task = " ".join(list_of_tasks[task_to_rename])
+            task_index = files_worker.read_json_tasks_index(time_now, task, data_tasks_time)
+            input_new_name = input("Input new name: ")
+            if input_new_name:
+                files_worker.rename_task(time_now, task_index, task, data_tasks_time, input_new_name)
+                main()
+            else:
+                print("Name should consist of at least one symbol")
+        except ValueError:
+            print("Enter valid symbols")
+            main()
 
     # simply clear the console
     elif "cls" in user_input.lower():
@@ -194,6 +219,7 @@ def main():
               "\tadd -one and chose one date to flush\n"
               "Input \"Enter time\" and chose task to add time to\n" 
               "\tadd -r and remove last time record\n"
+              "Input \"Rename\" chose the task to rename and enter new name"
               "Input \"cls\" to clean the console"
               )
         main()
@@ -202,10 +228,4 @@ def main():
     main()
 
 
-
 main()
-# test_cases  --file-version=0.0.4.16 --product-name=Time_manager --enable-console --mingw64 --standalone --windows-icon-from-ico=coding.ico --output-dir="C:\Users\wda61\PycharmProjects\Builds\Organizer" --remove-output
-# --file-version=0.0.5.1 --product-name=Time_manager --enable-console --mingw64 --standalone --windows-icon-from-ico=coding.ico --output-dir="C:\Distributed_apps" --remove-output
-
-
-

@@ -16,7 +16,7 @@ def erase_data(position=None, all_days=True):
         check_current_date(data_tasks_time)
     elif not all_days:
         clear_json(data_tasks_time, position)
-        check_current_date(data_tasks_time, position)
+        check_current_date(data_tasks_time)
 
 
 def clear_json(file_name, position=None):
@@ -126,7 +126,7 @@ def read_json_date(file_name):
                 day_name = full_day.strftime('%a %d')
                 month_name = full_day.strftime('%b')
                 year = full_day.strftime('\'%y')
-                print(f"{day_name} {month_name} {year} {len(file_data[day])} tasks {day_slash}")
+                print(f"{day_name} {month_name} {year} {len(file_data[day][1:])} tasks {day_slash}")
 
 
 def append_json(position, data, file_name, remove=False):
@@ -151,6 +151,17 @@ def append_json(position, data, file_name, remove=False):
                 index_to_delete = file_data[position].index(task)
 
                 file_data[position].pop(index_to_delete)
+
+    with open(file_name, "w") as json_file:
+        json.dump(file_data, json_file, ensure_ascii=False, indent=4)
+
+
+def rename_task(position, index, task, file_name, new_name):
+    with open(file_name, "r") as json_file:
+        file_data = json.load(json_file)
+
+    file_data[position][index][new_name] = file_data[position][index][task]
+    del file_data[position][index][task]
 
     with open(file_name, "w") as json_file:
         json.dump(file_data, json_file, ensure_ascii=False, indent=4)

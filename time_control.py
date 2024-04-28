@@ -19,18 +19,16 @@ def get_time():
     return time_kz.strftime("%m/%d/%Y %H-%M-%S")
 
 
-def get_time_read_input(input):
+def get_time_read_input(input, parameter):
     if not input:
         input_task = date_get()
         data = files_worker.read_json_tasks_time(data_tasks_time, input_task)
         return data
-    if input.find("-n"):
-        parameter = input.find("-n")
-        data = files_worker.read_json_tasks_time_by_name(data_tasks_time, input[0:parameter-1])
+    if parameter.split().count("-n"):
+        data = files_worker.read_json_tasks_time_by_name(data_tasks_time, input)
         return data
-    if input.find("-d"):
-        parameter = input.find("-d")
-        data = files_worker.read_json_tasks_time(data_tasks_time, input[0:parameter - 1])  # <class 'list'>
+    if parameter.split().count("-d"):
+        data = files_worker.read_json_tasks_time(data_tasks_time, input)  # <class 'list'>
         return data
 
 
@@ -58,11 +56,11 @@ def time_control(new_task):
 
 
 # show available dates open data_tasks_time.json and read all keys with seconds.
-def read_time(file_name):
+def read_time(file_name, parameter):
     working_day_start = files_worker.read_json("work_start_time_stamp", json_data_list_file)
     files_worker.read_json_date(file_name)
     input_task = input("Input date or task: ")
-    data = get_time_read_input(input_task)
+    data = get_time_read_input(input_task, parameter)
 
     tasks_time = data[0]
 
