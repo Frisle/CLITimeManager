@@ -6,7 +6,7 @@ From programmer to programmers<br>
 This app has <b>NO</b> fancy UI, <b>NO</b> big complicated data bases, <b>NO</b> online functions, <b>NO</b> third parties hyped modules<br>
 Just bare bone python, cli and json DB<br>
 That`s it!<br>
-Yes, it has json DB and coding bunch of functions to read/write json files was tedious and small SQLite would be much easier to work with... BUT WHERE THE FUN IN THAT?!<br>
+Yes, it has json DB and coding bunch of functions to read/write json files was tedious and small SQLite would be much easier to work with... BUT WHERE IS THE FUN IN THAT?!<br>
 Although i have already code it all so you don't have to
 
 Despite simplicity it has all the instruments to track down time spended on a tasks<br>
@@ -15,7 +15,7 @@ App track down every second while you at work and when you do not<br>
 (as long as app is up and running)<br>
 
 To run it just proced to working directory and type ``` python main.py ```<br>
-If you want it to be compiled type ``` python compiler.py ```. But this require to download heavy stuff<br>
+If you want it to be compiled type ``` python compiler.py ```. But this require to install third parties lib<br>
 
 ### How to use it?
 
@@ -47,8 +47,12 @@ Beautiful, is it not?
 
 ### Compilation
 
-If you desperate to compile it there is a files and libraries you will have to get
+Compiler gather together all the modules and pack them in one .exe file with some dependencies<br>
+Target dir will be situated in the working dir<br>
 
-First and foremost Nuitka. It will compile all modules into handy .exe
+### For Mac users out there
 
-For it to work Nuitka have to download an archive about ~300MB in weight 
+I haven't tested compilation on a Mac yet because I don't have one<br>
+But if you are brave, you can mangle with the compiler options and try to compile it<br>
+
+
