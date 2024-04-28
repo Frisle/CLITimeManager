@@ -35,6 +35,7 @@ Input "Erase" and flush entire json DB
   add -one and chose one date to flush
 Input "Enter time" and chose task to add time to 
   add -r and remove last time record
+Input "Rename" chose the task to rename and enter new name
 Input "cls" to clean the console
 ```
 
